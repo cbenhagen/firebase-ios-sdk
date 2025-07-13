@@ -561,7 +561,9 @@ class AuthAPI_hOnlyTests: XCTestCase {
     func phoneMultiFactorInfo(mfi: PhoneMultiFactorInfo) {
       let _: String = mfi.phoneNumber
     }
+  #endif
 
+  #if os(iOS) || os(macOS)
     func FIRTOTPSecret_h(session: MultiFactorSession) async throws {
       let obj = try await TOTPMultiFactorGenerator.generateSecret(with: session)
       _ = obj.sharedSecretKey()
@@ -651,7 +653,7 @@ class AuthAPI_hOnlyTests: XCTestCase {
     let _: Bool = user.isEmailVerified
     let _: [UserInfo] = user.providerData
     let _: UserMetadata = user.metadata
-    #if os(iOS)
+    #if os(iOS) || os(macOS)
       let _: MultiFactor = user.multiFactor
     #endif
     if let _: String = user.refreshToken,
